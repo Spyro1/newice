@@ -1,0 +1,55 @@
+# A munkafolyamat neve, ez fog megjelenni a GitHub Actions fülön.
+name: Deploy Frontend
+
+# Mikor fusson le a munkafolyamat
+on:
+  push:
+    branches:
+      - main
+  workflow_call: {}   # Ez kell az orchestrator importhoz
+  workflow_dispatch:  # Lehetővé teszi a manuális futtatást is a GitHub Actions fülről
+
+# A futtatandó feladatok (job-ok)
+jobs:
+  # A build és deploy feladat neve.
+  build-and-deploy:
+    # A környezet, amiben futni fog (leggyakrabban Ubuntu a CI/CD-hez)
+    environment:
+      name: production
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Ezt kell a gh-pages-nek a push-hoz
+      pages: write    # Ezt kell a GitHub Pages deploy-hoz
+      id-token: write
+    # A feladat lépései
+    steps:
+      # 1. Kód lekérése a repository-ból (Checkout)
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        
+      # 2. Node.js környezet beállítása
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # 3. Függőségek telepítése a Preact apphoz
+      - name: Install Dependencies
+        run: npm ci
+        working-directory: ./preact-app 
+
+      # 4. Git felhasználói adatok konfigurálása (gh-pages push miatt)
+      - name: Configure Git User Identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+        working-directory: ./preact-app 
+
+      # 5. A build és deploy parancs futtatása a gh-pages branch-re
+      - name: Run Deploy Script
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npm run build
+          npx gh-pages -d dist -b gh-pages --repo "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+        working-directory: ./preact-app 

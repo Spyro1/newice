@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'preact/hooks'
-import { Link } from 'preact-router/match'
+import { useEffect, useState } from 'react'
+import { NavLink } from 'react-router-dom'
 
 const navItems = [
     { href: '/', label: 'Kezdőlap' },
@@ -30,38 +30,41 @@ export default function Header() {
         return () => document.body.style.removeProperty('overflow')
     }, [menuOpen])
 
+    const desktopNavClass = ({ isActive }) => `${navLink} ${isActive ? activeNav : ''}`
+    const mobileNavClass = ({ isActive }) => `${mobileNavLink} ${isActive ? mobileActiveNav : ''}`
+
     return (
         <>
-            <header class="sticky top-0 z-50">
-                <div class="backdrop-blur-xl bg-[#031221]/80 border-b border-white/5">
-                    <div class="max-w-6xl xl:max-w-7xl mx-auto flex items-center gap-3 sm:gap-5 px-4 sm:px-6 py-4">
-                        <div class="flex items-center gap-3 w-full md:w-auto">
-                            <a href="/" class="flex flex-shrink-0 items-center gap-3 text-white min-w-[200px]">
-                                <img src="/assets/img/logo.png" alt="NewIce" class="h-12 w-12 object-contain drop-shadow-lg" />
+            <header className="sticky top-0 z-50">
+                <div className="backdrop-blur-xl bg-[#031221]/80 border-b border-white/5">
+                    <div className="max-w-6xl xl:max-w-7xl mx-auto flex items-center gap-3 sm:gap-5 px-4 sm:px-6 py-4">
+                        <div className="flex items-center gap-3 w-full md:w-auto">
+                            <a href="/" className="flex flex-shrink-0 items-center gap-3 text-white min-w-[200px]">
+                                <img src="/assets/img/logo.png" alt="NewIce" className="h-12 w-12 object-contain drop-shadow-lg" />
                                 <div>
-                                    <p class="text-2xl font-heading tracking-widest">NewIce</p>
-                                    <p class="text-xs tracking-[0.3em] text-white/60 uppercase">Budaörsi jégpálya</p>
+                                    <p className="text-2xl font-heading tracking-widest">NewIce</p>
+                                    <p className="text-xs tracking-[0.3em] text-white/60 uppercase">Budaörsi jégpálya</p>
                                 </div>
                             </a>
 
                             <button
                                 type="button"
-                                class="md:hidden h-12 w-12 rounded-full border border-white/20 text-white flex flex-col items-center justify-center gap-1 ml-auto flex-shrink-0"
+                                className="md:hidden h-12 w-12 rounded-full border border-white/20 text-white flex flex-col items-center justify-center gap-1 ml-auto flex-shrink-0"
                                 aria-label="Menü megnyitása"
                                 aria-expanded={menuOpen}
                                 onClick={() => setMenuOpen(open => !open)}
                             >
-                                <span class={`h-0.5 w-6 bg-white transition ${menuOpen ? 'translate-y-1.5 rotate-45' : ''}`}></span>
-                                <span class={`h-0.5 w-6 bg-white transition ${menuOpen ? 'opacity-0' : ''}`}></span>
-                                <span class={`h-0.5 w-6 bg-white transition ${menuOpen ? '-translate-y-1.5 -rotate-45' : ''}`}></span>
+                                <span className={`h-0.5 w-6 bg-white transition ${menuOpen ? 'translate-y-1.5 rotate-45' : ''}`}></span>
+                                <span className={`h-0.5 w-6 bg-white transition ${menuOpen ? 'opacity-0' : ''}`}></span>
+                                <span className={`h-0.5 w-6 bg-white transition ${menuOpen ? '-translate-y-1.5 -rotate-45' : ''}`}></span>
                             </button>
                         </div>
 
-                        <nav class="hidden md:flex flex-1 items-center justify-end gap-2 lg:gap-3 rounded-full bg-white/5 border border-white/10 px-3 lg:px-4 xl:px-5 py-2">
+                        <nav className="hidden md:flex flex-1 items-center justify-end gap-2 lg:gap-3 rounded-full bg-white/5 border border-white/10 px-3 lg:px-4 xl:px-5 py-2">
                             {navItems.map(item => (
-                                <Link key={item.href} href={item.href} activeClassName={activeNav} class={navLink}>
+                                <NavLink key={item.href} to={item.href} className={desktopNavClass}>
                                     {item.label}
-                                </Link>
+                                </NavLink>
                             ))}
                         </nav>
                     </div>
@@ -69,18 +72,17 @@ export default function Header() {
 
             </header>
             {menuOpen && (
-                <div class="md:hidden fixed inset-0 bg-[#010815]/95 backdrop-blur-lg z-40 pt-28 pb-10 overflow-y-auto">
-                    <div class="flex flex-col gap-5 px-6">
+                <div className="md:hidden fixed inset-0 bg-[#010815]/95 backdrop-blur-lg z-40 pt-28 pb-10 overflow-y-auto">
+                    <div className="flex flex-col gap-5 px-6">
                         {navItems.map(item => (
-                            <Link
+                            <NavLink
                                 key={`mobile-${item.href}`}
-                                href={item.href}
-                                activeClassName={mobileActiveNav}
-                                class={mobileNavLink}
+                                to={item.href}
+                                className={mobileNavClass}
                                 onClick={closeMenu}
                             >
                                 {item.label}
-                            </Link>
+                            </NavLink>
                         ))}
                     </div>
                 </div>

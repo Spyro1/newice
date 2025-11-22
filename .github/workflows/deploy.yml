@@ -1,45 +1,54 @@
 # The name of the workflow, which will appear on the GitHub Actions tab.
-name: Deploy Frontend
+name: Deploy Webpage
 
 # When the workflow should run (Triggers on push to the 'main' branch)
 on:
   push:
     branches:
       - main
+    workflow_dispatch:
 
-# The jobs to run
+# A futtatandó feladatok (job-ok)
 jobs:
+  # A build és deploy feladat neve.
   build-and-deploy:
+    # A környezet, amiben futni fog (leggyakrabban Ubuntu a CI/CD-hez)
     environment:
       name: production
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: write # Ezt kell a gh-pages-nek a push-hoz
+      pages: write    # Ezt kell a GitHub Pages deploy-hoz
+      id-token: write
+    # A feladat lépései
     steps:
-      - name: Checkout code
+      # 2. Kód lekérése a repository-ból (Checkout)
+      - name: Checkout Code
         uses: actions/checkout@v4
-
+        
+      # 3. Node.js környezet beállítása
       - name: Setup Node.js Environment
         uses: actions/setup-node@v4
         with:
           node-version: '22'
 
-      - name: Install dependencies
-        run: npm ci
-        working-directory: ./website
+      # 4. Függőségek telepítése
+      - name: Install Dependencies
+        run: npm install
+        working-directory: ./website 
 
-      - name: Configure git user
+      # 5. Git felhasználói adatok konfigurálása
+      - name: Configure Git User Identity
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-        working-directory: ./website
+        working-directory: ./website 
 
-      - name: Build and deploy React app
+      # 6. A build és deploy parancs futtatása
+      - name: Run Deploy Script
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Build the React application
           npm run build
-          # Use gh-pages to deploy the contents of the 'dist' directory to the 'gh-pages' branch
-          npx gh-pages -d dist -b gh-pages --repo "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
-        working-directory: ./website
+          npx gh-pages -d build --repo "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+        working-directory: ./website 

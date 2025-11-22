@@ -1,24 +1,45 @@
 const rules = [
-    'A pályán bukósisak és kesztyű viselése ajánlott.',
-    'A jégre kizárólag korcsolyában lehet belépni.',
-    'Tilos dohányozni és ételt bevinni a jégfelületre.',
-    'A pályafelügyelő utasításait mindenki köteles követni.',
-    'A pályán való tartózkodás saját felelősségre történik.'
+    {
+        title: 'Védőfelszerelés',
+        desc: 'Sisak és kesztyű viselése erősen ajánlott, hokiedzésen kötelező.',
+        icon: '/assets/img/icons/helmet.png'
+    },
+    {
+        title: 'Jégfelület megóvása',
+        desc: 'Cipővel tilos a jégre lépni, étel/ital csak a lelátón fogyasztható.',
+        icon: '/assets/img/icons/puck.png'
+    },
+    {
+        title: 'Pályafelügyelet',
+        desc: 'A személyzet jelzése azonnal követendő a balesetek megelőzéséért.',
+        icon: '/assets/img/icons/group.png'
+    },
+    {
+        title: 'Felelősség',
+        desc: 'A pályán való tartózkodás saját felelősségre történik, szülői kíséret 10 év alatt kötelező.',
+        icon: '/assets/img/icons/family.png'
+    }
 ]
 
 export default function Rules() {
     return (
-        <section class="max-w-4xl mx-auto px-4 py-16 space-y-6">
-            <header class="rect-card">
-                <p class="text-sm uppercase tracking-[0.3em] text-accent-dark">Házirend</p>
-                <h2 class="text-3xl font-heading mt-3">Biztonságos korcsolyázás</h2>
-                <p class="text-sm text-text mt-2">Köszönjük, hogy betartod szabályainkat, így mindenki gondtalanul élvezheti a jeget.</p>
+        <section class="max-w-6xl mx-auto px-4 py-20 space-y-10 text-white">
+            <header class="text-center space-y-3">
+                <span class="badge-ice">Házirend</span>
+                <h2 class="text-4xl font-heading">Biztonságos jég mindenkiért</h2>
+                <p class="text-white/70">Az alábbi szabályokkal biztosítjuk, hogy minden korosztály gondtalanul élvezhesse a csúszást.</p>
             </header>
-            <ul class="rect-card space-y-3 text-text">
+            <div class="grid gap-6 md:grid-cols-2">
                 {rules.map(rule => (
-                    <li key={rule}>• {rule}</li>
+                    <article key={rule.title} class="frosted-card p-6 flex gap-4 items-start">
+                        <img src={rule.icon} alt="ikon" class="h-12 w-12" />
+                        <div>
+                            <h3 class="text-2xl font-heading">{rule.title}</h3>
+                            <p class="text-white/75 text-sm">{rule.desc}</p>
+                        </div>
+                    </article>
                 ))}
-            </ul>
+            </div>
         </section>
     )
 }

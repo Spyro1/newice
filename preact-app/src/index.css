@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --accent: #24CBD3;
+    --accent-dark: #037f89;
+    --surface: #ffffff;
+    --bg: #ffffff;
+    --text: #444444;
+    --heading: #191919;
+}
+
+body {
+    font-family: 'Open Sans', system-ui, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+}
+
+.rect-card {
+    border-left: 6px solid var(--accent-dark);
+    padding: 1.25rem;
+    background: var(--surface);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+}
+
+.btn-accent {
+    display: inline-block;
+    padding: 0.65rem 1.25rem;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 600;
+}

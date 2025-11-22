@@ -3,6 +3,33 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
+# General OS clutter
+.DS_Store
+Thumbs.db
+
+# Node / front-end build artifacts
+**/node_modules/
+**/dist/
+**/build/
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Environment and tool files
+.env
+.env.*
+preact-app/.env
+preact-app/.env.*
+.vercel
+.netlify
+.turbo
+.parcel-cache
+
+# Project specific caches
+preact-app/.vite
+preact-app/.eslintcache
+
 # User-specific files
 *.rsuser
 *.suo

@@ -34,7 +34,7 @@ jobs:
 
       # 4. Függőségek telepítése
       - name: Install dependencies
-        run: npm ci
+        run: npm install
         working-directory: ./newice
 
       # 5. Git felhasználói adatok konfigurálása

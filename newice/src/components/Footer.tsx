@@ -51,7 +51,7 @@ export default function Footer() {
                 </div>
 
                 <div>
-                    <p className="font-semibold mb-3 text-white tracking-wide uppercase text-xs">Elérhetőség</p>
+                    <p className="font-semibold mb-3 text-white tracking-wide uppercase text-xs">Kapcsolat</p>
                     <div className="space-y-2 text-sm text-white/75">
                         <p>Telefon: <a className="text-white" href="tel:+36305699567">+36 30 569 9567</a></p>
                         <p>Email: <a className="text-white" href="mailto:newiceinfo@gmail.com">newiceinfo@gmail.com</a></p>

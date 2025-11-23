@@ -9,7 +9,7 @@ const navItems = [
     { href: '/open', label: 'Nyitvatartás' },
     { href: '/prices', label: 'Áraink' },
     { href: '/rules', label: 'Házirend' },
-    { href: '/contact', label: 'Elérhetőség' }
+    { href: '/contact', label: 'Kapcsolat' }
 ]
 
 const navLink = 'relative px-1.5 lg:px-2 py-2 text-[0.64rem] md:text-[0.7rem] lg:text-sm tracking-[0.18em] md:tracking-[0.2em] lg:tracking-[0.22em] uppercase text-white/70 hover:text-white transition whitespace-nowrap'
@@ -40,7 +40,7 @@ export default function Header() {
         <>
             <header className="sticky top-0 z-50">
                 <div className="backdrop-blur-xl bg-[#031221]/80 border-b border-white/5">
-                    <div className="max-w-6xl xl:max-w-7xl mx-auto flex items-center gap-3 sm:gap-5 px-4 sm:px-6 py-4">
+                    <div className="max-w-6xl xl:max-w-7xl mx-auto flex items-center justify-between gap-3 sm:gap-5 px-4 sm:px-6 py-4">
                         <div className="flex items-center gap-3 w-full md:w-auto">
                             <Link to="/" className="flex flex-shrink-0 items-center gap-3 text-white min-w-[200px]">
                                 <img src={assetUrl('/assets/img/logo.png')} alt="NewIce" className="h-12 w-12 object-contain drop-shadow-lg" />
@@ -63,7 +63,7 @@ export default function Header() {
                             </button>
                         </div>
 
-                        <nav className="hidden md:flex flex-1 items-center justify-end gap-2 lg:gap-3 rounded-full bg-white/5 border border-white/10 px-3 lg:px-4 xl:px-5 py-2">
+                        <nav className="hidden md:flex items-center justify-end gap-2 lg:gap-3 rounded-full bg-white/5 border border-white/10 px-3 lg:px-4 xl:px-5 py-2">
                             {navItems.map(item => (
                                 <NavLink key={item.href} to={item.href} className={desktopNavClass}>
                                     {item.label}

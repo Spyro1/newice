@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/newice/static/css/main.be302ab0.css",
-    "main.js": "/newice/static/js/main.d8e44d2a.js",
+    "main.css": "/newice/static/css/main.369730fb.css",
+    "main.js": "/newice/static/js/main.a8b3a5f7.js",
     "index.html": "/newice/index.html",
-    "main.be302ab0.css.map": "/newice/static/css/main.be302ab0.css.map",
-    "main.d8e44d2a.js.map": "/newice/static/js/main.d8e44d2a.js.map"
+    "main.369730fb.css.map": "/newice/static/css/main.369730fb.css.map",
+    "main.a8b3a5f7.js.map": "/newice/static/js/main.a8b3a5f7.js.map"
   },
   "entrypoints": [
-    "static/css/main.be302ab0.css",
-    "static/js/main.d8e44d2a.js"
+    "static/css/main.369730fb.css",
+    "static/js/main.a8b3a5f7.js"
   ]
 }

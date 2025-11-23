@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 type DayKey = 'hetfo' | 'kedd' | 'szerda' | 'csutortok' | 'pentek' | 'szombat' | 'vasarnap'
 
@@ -59,12 +59,12 @@ export const WeekCalendar: React.FC<WeekCalendarProps> = ({ initial = [], admin 
     }, [slots])
 
     const openNew = () => { setEditingId(null); setDraft({ day: 'hetfo', start: 8, end: 9, label: '', color: palette[0] }); setFormOpen(true) }
-    const openEdit = (slot: SlotItem) => {
+    const openEdit = useCallback((slot: SlotItem) => {
         if (!admin) return
         setEditingId(slot.id)
         setDraft({ day: slot.day, start: slot.start, end: slot.end, label: slot.label, color: slot.color })
         setFormOpen(true)
-    }
+    }, [admin])
     const closeForm = () => setFormOpen(false)
 
     const addSlot = (e: React.FormEvent) => {
@@ -214,7 +214,7 @@ export const WeekCalendar: React.FC<WeekCalendarProps> = ({ initial = [], admin 
                 <h3 className="text-2xl font-heading">Heti naptár</h3>
                 {admin && <button onClick={openNew} className="btn-ice text-sm">Új idősáv</button>}
             </div>
-            <div className="overflow-x-auto rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm relative" style={{ height: calendarHeight }}>
+            <div className="overflow-x-auto overflow-y-hidden rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm relative" style={{ height: calendarHeight }}>
                 <div className="min-w-[900px] grid" style={{ gridTemplateColumns: `80px repeat(7, 1fr)` }}>
                     {/* Hour column header */}
                     <div ref={headerCellRef} className="bg-white/5 border border-white/10 p-2 text-xs uppercase tracking-[0.2em] text-white/60">Idő</div>

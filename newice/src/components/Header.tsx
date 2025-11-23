@@ -12,15 +12,24 @@ const navItems = [
     { href: '/contact', label: 'Kapcsolat' }
 ]
 
-const navLink = 'relative px-1.5 lg:px-2 py-2 text-[0.64rem] md:text-[0.7rem] lg:text-sm tracking-[0.18em] md:tracking-[0.2em] lg:tracking-[0.22em] uppercase text-white/70 hover:text-white transition whitespace-nowrap'
+const navLink = 'relative px-1.5 lg:px-2 py-2 text-[0.64rem] md:text-[0.6rem] lg:text-[0.75rem] xl:text-[0.8rem] tracking-[0.18em] md:tracking-[0.2em] lg:tracking-[0.22em] uppercase text-white/70 hover:text-white transition whitespace-nowrap'
 const activeNav = "text-white after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-1 after:w-6 after:h-0.5 after:bg-accent"
 const mobileNavLink = 'relative text-2xl font-heading uppercase tracking-[0.35em] text-white/60 pl-6'
 const mobileActiveNav = "text-white before:content-[''] before:absolute before:-left-6 before:top-1/2 before:-translate-y-1/2 before:h-8 before:w-0.5 before:bg-accent"
 
 export default function Header() {
     const [menuOpen, setMenuOpen] = useState(false)
+    const [menuVisible, setMenuVisible] = useState(false)
 
-    const closeMenu = () => setMenuOpen(false)
+    const openMenu = () => {
+        setMenuVisible(true)
+        setMenuOpen(true)
+    }
+    const closeMenu = () => {
+        setMenuOpen(false)
+        // Wait for exit animation before unmount
+        setTimeout(() => setMenuVisible(false), 250)
+    }
 
     useEffect(() => {
         if (menuOpen) {
@@ -55,7 +64,7 @@ export default function Header() {
                                 className="md:hidden h-12 w-12 rounded-full border border-white/20 text-white flex flex-col items-center justify-center gap-1 ml-auto flex-shrink-0"
                                 aria-label="Menü megnyitása"
                                 aria-expanded={menuOpen}
-                                onClick={() => setMenuOpen(open => !open)}
+                                onClick={() => (menuOpen ? closeMenu() : openMenu())}
                             >
                                 <span className={`h-0.5 w-6 bg-white transition ${menuOpen ? 'translate-y-1.5 rotate-45' : ''}`}></span>
                                 <span className={`h-0.5 w-6 bg-white transition ${menuOpen ? 'opacity-0' : ''}`}></span>
@@ -74,8 +83,8 @@ export default function Header() {
                 </div>
 
             </header>
-            {menuOpen && (
-                <div className="md:hidden fixed inset-0 bg-[#010815]/95 backdrop-blur-lg z-40 pt-28 pb-10 overflow-y-auto">
+            {menuVisible && (
+                <div className={`md:hidden fixed inset-0 bg-[#010815]/95 backdrop-blur-lg z-40 pt-28 pb-10 overflow-y-auto ${menuOpen ? 'menu-overlay-enter' : 'menu-overlay-exit'}`}>
                     <div className="flex flex-col gap-5 px-6">
                         {navItems.map(item => (
                             <NavLink

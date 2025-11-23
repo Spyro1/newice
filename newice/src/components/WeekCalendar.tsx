@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 
 type DayKey = 'hetfo' | 'kedd' | 'szerda' | 'csutortok' | 'pentek' | 'szombat' | 'vasarnap'
 
@@ -22,16 +22,6 @@ const dayLabels: Record<DayKey, string> = {
 }
 
 const hourRange = { start: 7, end: 23 } // 7:00 .. 23:00
-
-// Legacy mapping (was type -> color); kept for migration only.
-const legacyTypeColors: Record<string, string> = {
-    kozonseg: '#0891b2',
-    oktatas: '#16a34a',
-    foglalt: '#dc2626',
-    hoki: '#7e22ce',
-    berles: '#eab308',
-    diszko: '#db2777'
-}
 
 function generateId() { return Math.random().toString(36).slice(2) }
 
@@ -216,7 +206,7 @@ export const WeekCalendar: React.FC<WeekCalendarProps> = ({ initial = [], admin 
         window.addEventListener('mousemove', onMove)
         window.addEventListener('mouseup', onUp, { once: true })
         return () => { window.removeEventListener('mousemove', onMove) }
-    }, [dragging, admin])
+    }, [dragging, admin, openEdit])
 
     return (
         <div className="space-y-6">

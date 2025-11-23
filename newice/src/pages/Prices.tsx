@@ -1,6 +1,3 @@
-import { assetUrl } from '../utils/assetUrl'
-
-// Összegzés az /araink oldal alapján (összevonva, tömörítve – nem szó szerinti idézet)
 const weekdayPublic = [
     { title: 'Gyermek (≤14 év)', price: '2 300 Ft / alkalom', desc: 'Hétköznap közönségjég idősávokra.' },
     { title: 'Felnőtt (>14 év)', price: '3 000 Ft / alkalom', desc: 'Hétköznap közönségjég idősávokra.' }

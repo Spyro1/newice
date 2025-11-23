@@ -1,15 +1,6 @@
 import { Link, useSearchParams } from 'react-router-dom'
 import WeekCalendar from '../components/WeekCalendar'
 
-// Rövidített minta – a valós, napi bontású pályabeosztás dinamikus és az hivatalos oldalon frissül.
-const sampleBlocks = [
-    { status: 'Közönségjég', type: 'open', times: ['Délelőtti és délutáni blokkok', 'Változó kapacitás – ellenőrizd indulás előtt'] },
-    { status: 'Tanfolyam / Oktatás', type: 'team', times: ['Hétfő / Szerda kora este', 'Szombat reggeli turnusok'] },
-    { status: 'Hoki utánpótlás', type: 'team', times: ['Délutáni edzésidők', 'Korosztályonként eltérő kezdés'] },
-    { status: 'Jégdiszkó', type: 'disco', times: ['Kiemelt szombat esték', 'DJ + fénytechnika'] },
-    { status: 'Pályabérlés', type: 'team', times: ['Rugalmas egyeztetés alapján', 'Hétvégi korlátozott sávok'] }
-]
-
 const quickInfo = [
     { label: 'Friss pályabeosztás', value: 'Mindig nézd meg indulás előtt' },
     { label: 'Jegyváltás', value: 'Helyszínen érkezési sorrendben' },

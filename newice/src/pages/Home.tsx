@@ -1,18 +1,21 @@
+import { Link } from 'react-router-dom'
+import { assetUrl } from '../utils/assetUrl'
+
 const highlights = [
     {
         title: 'Közönségjég egész nap',
         text: 'Átlátható idősávok családoknak és kezdőknek – kristálytiszta jég, chill zene, meleg italok.',
-        icon: '/assets/img/icons/ice-skating.png'
+        icon: assetUrl('/assets/img/icons/ice-skating.png')
     },
     {
         title: 'Hokisuli & edzések',
         text: 'Haladó edzések és korcsolya-oktatók várják a csapatokat, cégeket és iskolákat.',
-        icon: '/assets/img/icons/hockey-sticks.png'
+        icon: assetUrl('/assets/img/icons/hockey-sticks.png')
     },
     {
         title: 'Disco jég',
         text: 'Minden péntek este fényshow-val és DJ-vel. Korhatár nélkül, limitált férőhely!',
-        icon: '/assets/img/icons/disco-ball.png'
+        icon: assetUrl('/assets/img/icons/disco-ball.png')
     }
 ]
 
@@ -40,14 +43,14 @@ const events = [
         time: 'Péntek 20:30 – 23:30',
         badge: 'Nyitott',
         desc: 'UV-fény, DJ, jégkoktélok. Limitált jegyek a helyszínen és online.',
-        image: '/assets/img/hero_3.jpg'
+        image: assetUrl('/assets/img/hero_3.jpg')
     },
     {
         title: 'Csapatbérlés prime idősávban',
         time: 'Hétfő – Csütörtök 06:00 – 08:00',
         badge: 'Foglalt gyorsan',
         desc: 'Vállalati vagy hokicsapat számára fenntartott edzésidő, profi jégmesterekkel.',
-        image: '/assets/img/hero_4.jpg'
+        image: assetUrl('/assets/img/hero_4.jpg')
     }
 ]
 
@@ -56,7 +59,7 @@ export default function Home() {
         <div className="space-y-24 pb-24 text-white">
             <section className="relative overflow-hidden">
                 <div className="absolute inset-0">
-                    <img src="/assets/img/hero_1.jpg" alt="Ice skaters" className="w-full h-full object-cover" />
+                    <img src={assetUrl('/assets/img/hero_1.jpg')} alt="Ice skaters" className="w-full h-full object-cover" />
                     <div className="absolute inset-0 bg-gradient-to-br from-[#010b16]/90 via-[#021e2f]/70 to-[#022a40]/70" />
                     <div className="absolute inset-0 grid-lines opacity-40" />
                 </div>
@@ -70,8 +73,8 @@ export default function Home() {
                             Hajnalban edzés, délután közönségjég, este disco. Kényelmes lounge, digitális beléptetés és prémium jégfelület vár.
                         </p>
                         <div className="flex flex-wrap gap-4">
-                            <a href="/open" className="btn-ice">Nyitvatartás</a>
-                            <a href="/gallery" className="btn-ghost">Nézd meg a hangulatot</a>
+                            <Link to="/open" className="btn-ice">Nyitvatartás</Link>
+                            <Link to="/gallery" className="btn-ghost">Nézd meg a hangulatot</Link>
                         </div>
                         <div className="flex gap-6 pt-4 text-sm text-white/80">
                             <div>
@@ -90,7 +93,7 @@ export default function Home() {
                     </div>
 
                     <div className="relative lg:w-1/2 image-stack">
-                        <img src="/assets/img/hero_2.jpg" alt="Family skating" className="relative w-full h-[420px] object-cover" />
+                        <img src={assetUrl('/assets/img/hero_2.jpg')} alt="Family skating" className="relative w-full h-[420px] object-cover" />
                         <div className="absolute -bottom-10 -left-6 bg-white/10 backdrop-blur rounded-2xl px-6 py-4 border border-white/20 shadow-2xl">
                             <p className="text-sm uppercase tracking-[0.3em] text-accent">Élő hőmérséklet</p>
                             <p className="text-3xl font-heading">-3.5°C</p>
@@ -123,12 +126,12 @@ export default function Home() {
                         <li>• LED kijelzőn követhető az időeredmény</li>
                     </ul>
                     <div className="flex gap-4 pt-2">
-                        <a href="/open" className="btn-ice">Foglalj sávot</a>
-                        <a href="/contact" className="btn-ghost">Szülinapi csomag</a>
+                        <Link to="/open" className="btn-ice">Foglalj sávot</Link>
+                        <Link to="/contact" className="btn-ghost">Szülinapi csomag</Link>
                     </div>
                 </div>
                 <div className="relative rounded-[2rem] overflow-hidden shine">
-                    <img src="/assets/img/actual/aktualis-korcsolya-oktatas.png" alt="Aktuális program" className="w-full object-cover" />
+                    <img src={assetUrl('/assets/img/actual/aktualis-korcsolya-oktatas.png')} alt="Aktuális program" className="w-full object-cover" />
                     <div className="absolute bottom-6 right-6 bg-black/60 px-5 py-3 rounded-2xl text-xs uppercase tracking-[0.2em]">Frissítve ma 10:00</div>
                 </div>
             </section>
@@ -154,7 +157,7 @@ export default function Home() {
                                     <h3 className="text-3xl font-heading">{event.title}</h3>
                                     <p className="text-white/70 text-sm">{event.time}</p>
                                     <p className="text-white/80 text-sm">{event.desc}</p>
-                                    <a href="/contact" className="btn-ghost w-max">Részletek</a>
+                                    <Link to="/contact" className="btn-ghost w-max">Részletek</Link>
                                 </div>
                             </div>
                         </article>

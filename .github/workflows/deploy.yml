@@ -33,16 +33,16 @@ jobs:
           node-version: '22'
 
       # 4. Függőségek telepítése
-      - name: Install Dependencies
-        run: npm install
-        working-directory: ./website 
+      - name: Install dependencies
+        run: npm ci
+        working-directory: ./newice
 
       # 5. Git felhasználói adatok konfigurálása
-      - name: Configure Git User Identity
+      - name: Configure Git user identity
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-        working-directory: ./website 
+        working-directory: ./newice
 
       # 6. A build és deploy parancs futtatása
       - name: Run Deploy Script
@@ -50,5 +50,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           npm run build
-          npx gh-pages -d build --repo "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
-        working-directory: ./website 
+          npx gh-pages -d build -b gh-pages --repo "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+        working-directory: ./newice

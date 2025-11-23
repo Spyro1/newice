@@ -1,10 +1,12 @@
+import { assetUrl } from '../utils/assetUrl'
+
 const gallery = [
-    { src: '/assets/img/hero_1.jpg', caption: 'Reggeli közönségjég' },
-    { src: '/assets/img/hero_2.jpg', caption: 'Családi csúszás' },
-    { src: '/assets/img/hero_3.jpg', caption: 'Glow disco hangulat' },
-    { src: '/assets/img/hero_4.jpg', caption: 'Csapat edzés akcióban' },
-    { src: '/assets/img/hero_5.jpg', caption: 'Lounge & kávézó' },
-    { src: '/assets/img/actual/aktualis-korcsolya-oktatas.png', caption: 'Aktuális akadálypálya' }
+    { src: assetUrl('/assets/img/hero_1.jpg'), caption: 'Reggeli közönségjég' },
+    { src: assetUrl('/assets/img/hero_2.jpg'), caption: 'Családi csúszás' },
+    { src: assetUrl('/assets/img/hero_3.jpg'), caption: 'Glow disco hangulat' },
+    { src: assetUrl('/assets/img/hero_4.jpg'), caption: 'Csapat edzés akcióban' },
+    { src: assetUrl('/assets/img/hero_5.jpg'), caption: 'Lounge & kávézó' },
+    { src: assetUrl('/assets/img/actual/aktualis-korcsolya-oktatas.png'), caption: 'Aktuális akadálypálya' }
 ]
 
 export default function Gallery() {

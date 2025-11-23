@@ -10,9 +10,23 @@ import Prices from './pages/Prices'
 import Rules from './pages/Rules'
 import NotFound from './pages/NotFound'
 
+const basePath = (() => {
+    const publicUrl = process.env.PUBLIC_URL
+    if (!publicUrl) {
+        return '/'
+    }
+
+    try {
+        const { pathname } = new URL(publicUrl)
+        return pathname.replace(/\/$/, '') || '/'
+    } catch {
+        return publicUrl.startsWith('/') ? publicUrl : `/${publicUrl}`
+    }
+})()
+
 export default function App() {
     return (
-        <BrowserRouter>
+        <BrowserRouter basename={basePath}>
             <div className="min-h-screen flex flex-col text-white">
                 <Header />
                 <main className="flex-1">

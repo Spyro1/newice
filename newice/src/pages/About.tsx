@@ -1,3 +1,5 @@
+import { assetUrl } from '../utils/assetUrl'
+
 const timeline = [
     { year: '2016', text: 'Megnyit a NewIce, első teljesen fedett pálya a budaörsi térségben.' },
     { year: '2019', text: 'Elindul a hokisuli és a családi hétvége program.' },
@@ -22,7 +24,7 @@ export default function About() {
                     <p className="text-white/70">Küldetésünk, hogy élménnyé tegyük a mozgást, legyen szó első csúszásról vagy profi hokis edzésről.</p>
                 </div>
                 <div className="image-stack">
-                    <img src="/assets/img/hero_4.jpg" alt="Csapat a jégen" className="w-full h-[420px] object-cover" />
+                    <img src={assetUrl('/assets/img/hero_4.jpg')} alt="Csapat a jégen" className="w-full h-[420px] object-cover" />
                 </div>
             </div>
 

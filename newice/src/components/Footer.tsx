@@ -1,3 +1,6 @@
+import { Link } from 'react-router-dom'
+import { assetUrl } from '../utils/assetUrl'
+
 const socials = [
     {
         name: 'Facebook',
@@ -23,7 +26,7 @@ export default function Footer() {
     return (
         <footer className="relative overflow-hidden bg-[#010f1b] text-white/90">
             <div className="absolute inset-0 opacity-50">
-                <img src="/assets/img/hero_4.jpg" alt="Icy texture" className="w-full h-full object-cover" />
+                <img src={assetUrl('/assets/img/hero_4.jpg')} alt="Icy texture" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-[#010f1b]/90" />
             </div>
 
@@ -59,10 +62,10 @@ export default function Footer() {
                 <div>
                     <p className="font-semibold mb-3 text-white tracking-wide uppercase text-xs">Gyorslinkek</p>
                     <div className="grid gap-2 text-sm text-white/70">
-                        <a className="hover:text-white transition" href="/open">Nyitvatartás</a>
-                        <a className="hover:text-white transition" href="/prices">Áraink</a>
-                        <a className="hover:text-white transition" href="/gallery">Galéria</a>
-                        <a className="hover:text-white transition" href="/rules">Házirend</a>
+                        <Link className="hover:text-white transition" to="/open">Nyitvatartás</Link>
+                        <Link className="hover:text-white transition" to="/prices">Áraink</Link>
+                        <Link className="hover:text-white transition" to="/gallery">Galéria</Link>
+                        <Link className="hover:text-white transition" to="/rules">Házirend</Link>
                     </div>
                 </div>
             </div>

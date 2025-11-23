@@ -1,3 +1,5 @@
+import { assetUrl } from '../utils/assetUrl'
+
 const tickets = [
     { title: 'Felnőtt belépő', price: '2 400 Ft', desc: '2 órás sávra érvényes, tartalmazza az öltözőhasználatot.', icon: '/assets/img/icons/ice-skating-people.png' },
     { title: 'Diák / Gyermek', price: '1 900 Ft', desc: '14 éves korig, hétvégén is ugyanennyi.', icon: '/assets/img/icons/ice-skating-boy.png' },
@@ -27,7 +29,7 @@ export default function Prices() {
             <div className="grid gap-6 md:grid-cols-3">
                 {tickets.map(item => (
                     <article key={item.title} className="frosted-card p-6 space-y-4">
-                        <img src={item.icon} alt="ikon" className="h-12 w-12" />
+                        <img src={assetUrl(item.icon)} alt="ikon" className="h-12 w-12" />
                         <h3 className="text-2xl font-heading">{item.title}</h3>
                         <p className="text-4xl font-heading text-accent">{item.price}</p>
                         <p className="text-white/70 text-sm">{item.desc}</p>
@@ -39,7 +41,7 @@ export default function Prices() {
                 {rental.map(item => (
                     <article key={item.title} className="frosted-card p-6 space-y-3">
                         <div className="flex items-center gap-3">
-                            <img src={item.icon} alt="ikon" className="h-12 w-12" />
+                            <img src={assetUrl(item.icon)} alt="ikon" className="h-12 w-12" />
                             <div>
                                 <h3 className="text-2xl font-heading">{item.title}</h3>
                                 <p className="text-white/70 text-sm">{item.desc}</p>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
+import { assetUrl } from '../utils/assetUrl'
 
 const navItems = [
     { href: '/', label: 'Kezdőlap' },
@@ -27,11 +28,13 @@ export default function Header() {
         } else {
             document.body.style.removeProperty('overflow')
         }
-        return () => document.body.style.removeProperty('overflow')
+        return () => {
+            document.body.style.removeProperty('overflow')
+        }
     }, [menuOpen])
 
-    const desktopNavClass = ({ isActive }) => `${navLink} ${isActive ? activeNav : ''}`
-    const mobileNavClass = ({ isActive }) => `${mobileNavLink} ${isActive ? mobileActiveNav : ''}`
+    const desktopNavClass = ({ isActive }: { isActive: boolean }) => `${navLink} ${isActive ? activeNav : ''}`
+    const mobileNavClass = ({ isActive }: { isActive: boolean }) => `${mobileNavLink} ${isActive ? mobileActiveNav : ''}`
 
     return (
         <>
@@ -39,13 +42,13 @@ export default function Header() {
                 <div className="backdrop-blur-xl bg-[#031221]/80 border-b border-white/5">
                     <div className="max-w-6xl xl:max-w-7xl mx-auto flex items-center gap-3 sm:gap-5 px-4 sm:px-6 py-4">
                         <div className="flex items-center gap-3 w-full md:w-auto">
-                            <a href="/" className="flex flex-shrink-0 items-center gap-3 text-white min-w-[200px]">
-                                <img src="/assets/img/logo.png" alt="NewIce" className="h-12 w-12 object-contain drop-shadow-lg" />
+                            <Link to="/" className="flex flex-shrink-0 items-center gap-3 text-white min-w-[200px]">
+                                <img src={assetUrl('/assets/img/logo.png')} alt="NewIce" className="h-12 w-12 object-contain drop-shadow-lg" />
                                 <div>
                                     <p className="text-2xl font-heading tracking-widest">NewIce</p>
                                     <p className="text-xs tracking-[0.3em] text-white/60 uppercase">Budaörsi jégpálya</p>
                                 </div>
-                            </a>
+                            </Link>
 
                             <button
                                 type="button"

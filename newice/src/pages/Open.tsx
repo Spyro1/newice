@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 const schedule = [
     {
         status: 'Közönségjég',
@@ -79,7 +81,7 @@ export default function Open() {
             <div className="frosted-card p-6 space-y-3">
                 <h3 className="text-2xl font-heading">Jéglabirintus</h3>
                 <p className="text-white/75">Hétvégenként 08:00 – 20:00 között folyamatosan nyitva, függetlenül az edzésidőktől. Maximum 40 fő bent tartózkodása engedélyezett, 45 perces blokkokra osztva.</p>
-                <a href="/contact" className="btn-ice w-max">Labirintus foglalás</a>
+                <Link to="/contact" className="btn-ice w-max">Labirintus foglalás</Link>
             </div>
         </section>
     )

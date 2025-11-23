@@ -1,3 +1,5 @@
+import { assetUrl } from '../utils/assetUrl'
+
 const contactChips = [
     { label: 'Telefon', value: '+36 30 569 9567', href: 'tel:+36305699567' },
     { label: 'Email', value: 'newiceinfo@gmail.com', href: 'mailto:newiceinfo@gmail.com' },
@@ -27,13 +29,13 @@ export default function Contact() {
                         <input className="w-full bg-white/5 border border-white/10 px-4 py-3 rounded-xl" type="email" placeholder="Email" />
                     </div>
                     <input className="w-full bg-white/5 border border-white/10 px-4 py-3 rounded-xl" type="text" placeholder="Melyik szolgáltatás érdekel?" />
-                    <textarea className="w-full bg-white/5 border border-white/10 px-4 py-3 rounded-xl" rows="5" placeholder="Üzenet" />
+                    <textarea className="w-full bg-white/5 border border-white/10 px-4 py-3 rounded-xl" rows={5} placeholder="Üzenet" />
                     <button className="btn-ice w-full" type="button">Üzenet küldése</button>
                 </form>
             </div>
 
             <div className="frosted-card p-0 overflow-hidden">
-                <img src="/assets/img/hero_4.jpg" alt="Jégpálya" className="h-80 w-full object-cover" />
+                <img src={assetUrl('/assets/img/hero_4.jpg')} alt="Jégpálya" className="h-80 w-full object-cover" />
                 <div className="p-6 space-y-2 text-white/80 text-sm">
                     <p>Parkolás: ingyenes, 120 férőhelyes felszíni parkoló.</p>
                     <p>Tömegközlekedés: 40-es busz Budaörs Sportcsarnok megálló.</p>

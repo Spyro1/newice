@@ -1,3 +1,5 @@
+import { assetUrl } from '../utils/assetUrl'
+
 const rules = [
     {
         title: 'Védőfelszerelés',
@@ -32,7 +34,7 @@ export default function Rules() {
             <div className="grid gap-6 md:grid-cols-2">
                 {rules.map(rule => (
                     <article key={rule.title} className="frosted-card p-6 flex gap-4 items-start">
-                        <img src={rule.icon} alt="ikon" className="h-12 w-12" />
+                        <img src={assetUrl(rule.icon)} alt="ikon" className="h-12 w-12" />
                         <div>
                             <h3 className="text-2xl font-heading">{rule.title}</h3>
                             <p className="text-white/75 text-sm">{rule.desc}</p>

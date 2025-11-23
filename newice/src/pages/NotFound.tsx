@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 export default function NotFound() {
     return (
         <section className="min-h-[60vh] flex items-center justify-center px-4 text-white">
@@ -5,7 +7,7 @@ export default function NotFound() {
                 <span className="badge-ice">404</span>
                 <h2 className="text-4xl font-heading">A keresett oldal nem található</h2>
                 <p className="text-white/70">Úgy tűnik, elcsúsztál a jégen. Térj vissza a kezdőlapra, és válassz új útvonalat!</p>
-                <a className="btn-ice inline-flex" href="/">Vissza a kezdőlapra</a>
+                <Link className="btn-ice inline-flex" to="/">Vissza a kezdőlapra</Link>
             </div>
         </section>
     )

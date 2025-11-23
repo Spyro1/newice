@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/NewIce/static/css/main.06c3a951.css",
+    "main.js": "/NewIce/static/js/main.d52350b2.js",
+    "index.html": "/NewIce/index.html",
+    "main.06c3a951.css.map": "/NewIce/static/css/main.06c3a951.css.map",
+    "main.d52350b2.js.map": "/NewIce/static/js/main.d52350b2.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.06c3a951.css",
+    "static/js/main.d52350b2.js"
+  ]
+}

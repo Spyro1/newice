@@ -1,87 +1,51 @@
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
+import WeekCalendar from '../components/WeekCalendar'
 
-const schedule = [
-    {
-        status: 'Közönségjég',
-        type: 'open',
-        slots: [
-            { time: '06:00 – 10:00', details: 'Csendes csúszás, utolsó belépés 09:00' },
-            { time: '10:00 – 14:00', details: 'Családi sáv, segédeszközök a helyszínen' }
-        ]
-    },
-    {
-        status: 'Csapat edzés / foglalt',
-        type: 'team',
-        slots: [
-            { time: '14:00 – 17:00', details: 'Hokicsapatok és iskolai csoportok' },
-            { time: '17:00 – 18:30', details: 'Pályabérlés előzetes foglalással' }
-        ]
-    },
-    {
-        status: 'Közönségjég + Disco',
-        type: 'disco',
-        slots: [
-            { time: '19:00 – 20:30', details: 'Nyitott mindenki számára, hangulatvilágítás' },
-            { time: '20:30 – 23:30 (Péntek, Szombat)', details: 'Glow Disco – DJ, fényshow, 14+ korhatár' }
-        ]
-    },
-    {
-        status: 'Karbantartás / Zárva',
-        type: 'closed',
-        slots: [
-            { time: '23:30 – 06:00', details: 'Jégápolás, karbantartás, privát rendezvények' }
-        ]
-    }
+// Rövidített minta – a valós, napi bontású pályabeosztás dinamikus és az hivatalos oldalon frissül.
+const sampleBlocks = [
+    { status: 'Közönségjég', type: 'open', times: ['Délelőtti és délutáni blokkok', 'Változó kapacitás – ellenőrizd indulás előtt'] },
+    { status: 'Tanfolyam / Oktatás', type: 'team', times: ['Hétfő / Szerda kora este', 'Szombat reggeli turnusok'] },
+    { status: 'Hoki utánpótlás', type: 'team', times: ['Délutáni edzésidők', 'Korosztályonként eltérő kezdés'] },
+    { status: 'Jégdiszkó', type: 'disco', times: ['Kiemelt szombat esték', 'DJ + fénytechnika'] },
+    { status: 'Pályabérlés', type: 'team', times: ['Rugalmas egyeztetés alapján', 'Hétvégi korlátozott sávok'] }
 ]
 
-const weeklyNote = [
-    { day: 'Hétfő – Csütörtök', info: 'Közönségjég 06:00 – 14:00, este edzések' },
-    { day: 'Péntek', info: 'Disco jég 20:30 – 23:30, limitált belépő' },
-    { day: 'Szombat – Vasárnap', info: 'Extra családi sávok 08:00 – 12:00' }
+const quickInfo = [
+    { label: 'Friss pályabeosztás', value: 'Mindig nézd meg indulás előtt' },
+    { label: 'Jegyváltás', value: 'Helyszínen érkezési sorrendben' },
+    { label: 'Felszerelés', value: 'Korcsolya bérlés a pénztárnál' },
+    { label: 'Kapacitás', value: 'Limitált – telítettségnél várakozás' }
 ]
 
 export default function Open() {
+    const [params] = useSearchParams()
+    const admin = params.get('admin') === '1'
     return (
-        <section className="max-w-6xl mx-auto px-4 py-20 space-y-10 text-white">
+        <section className="max-w-6xl mx-auto px-4 py-20 space-y-16 text-white">
             <div className="text-center space-y-3">
                 <span className="badge-ice">Nyitvatartás</span>
-                <h2 className="text-4xl font-heading">Heti menetrend</h2>
-                <p className="text-white/70">A táblázatban a fő idősávokat és azok státuszát látod. Foglalás előtt mindig ellenőrizd az aktuális napot!</p>
+                <h2 className="text-4xl font-heading">Aktuális pályabeosztás</h2>
+                <p className="text-white/70 max-w-2xl mx-auto">
+                    A közönségjég és edzésidők dinamikusan változnak. Mindig ellenőrizd a napi bontású táblázatot indulás előtt.
+                </p>
             </div>
 
-            <div className="frosted-card p-0 overflow-hidden">
-                <table className="schedule-grid text-sm text-white/80">
-                    <tbody>
-                        {schedule.map(block => (
-                            block.slots.map((slot, idx) => (
-                                <tr key={`${block.status}-${slot.time}`} className="bg-white/5">
-                                    {idx === 0 && (
-                                        <td rowSpan={block.slots.length} className={`align-top w-48 text-center font-semibold uppercase tracking-[0.2em] text-xs px-4 py-6 schedule-status-${block.type}`}>
-                                            {block.status}
-                                        </td>
-                                    )}
-                                    <td className="w-40 px-6 py-4 text-white">{slot.time}</td>
-                                    <td className="px-6 py-4">{slot.details}</td>
-                                </tr>
-                            ))
-                        ))}
-                    </tbody>
-                </table>
-            </div>
+            <WeekCalendar admin={admin} />
 
-            <div className="grid gap-4 md:grid-cols-3">
-                {weeklyNote.map(note => (
-                    <article key={note.day} className="frosted-card p-5">
-                        <p className="text-xs uppercase tracking-[0.3em] text-white/60">{note.day}</p>
-                        <p className="text-lg font-heading text-white">{note.info}</p>
-                    </article>
-                ))}
+            <div className="frosted-card p-6 space-y-4">
+                <h3 className="text-xl font-heading">Gyors infók</h3>
+                <ul className="grid md:grid-cols-2 gap-3 text-white/70 text-sm">
+                    {quickInfo.map(q => (
+                        <li key={q.label} className="flex items-start gap-2"><span className="text-accent">•</span><span><strong className="text-white/80">{q.label}:</strong> {q.value}</span></li>
+                    ))}
+                </ul>
+                <p className="text-white/50 text-xs">Admin mód: add `?admin=1` az URL-hez az idősávok szerkesztéséhez (lokális mentés). Átfedés nem engedélyezett.</p>
             </div>
 
             <div className="frosted-card p-6 space-y-3">
                 <h3 className="text-2xl font-heading">Jéglabirintus</h3>
-                <p className="text-white/75">Hétvégenként 08:00 – 20:00 között folyamatosan nyitva, függetlenül az edzésidőktől. Maximum 40 fő bent tartózkodása engedélyezett, 45 perces blokkokra osztva.</p>
-                <Link to="/contact" className="btn-ice w-max">Labirintus foglalás</Link>
+                <p className="text-white/75 text-sm">Szezonban (november–február) kiemelt hétvégi attrakció. Létszámkorlát, blokkos belépés. Mindig ellenőrizd az aktuális nyitvatartást.</p>
+                <Link to="/contact" className="btn-ice w-max">Információ / foglalás</Link>
             </div>
         </section>
     )

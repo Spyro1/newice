@@ -4,52 +4,52 @@ import { assetUrl } from '../utils/assetUrl'
 const highlights = [
     {
         title: 'Közönségjég',
-        text: 'Gyere korizni a családdal vagy a barátokkal! Jó zene, forrócsoki és szuper jég vár.',
+        text: 'Rengeteg szabad idősáv szeptember elejétől júniusig – mindig tájékozódj az aktuális pályabeosztás menüpontban!',
         icon: assetUrl('/assets/img/icons/ice-skating.png')
     },
     {
-        title: 'Hoki és oktatás',
-        text: 'Szeretnél megtanulni korizni vagy jégkorongozni? Profi oktatóink segítenek, akár teljesen kezdő vagy, akkor is megéri eljönni!',
+        title: 'Oktatás és tanfolyam',
+        text: 'Korcsolya- és hokitanfolyamok kis csoportokban, kezdőknek és haladóknak. Októbertől induló turnusok.',
         icon: assetUrl('/assets/img/icons/hockey-sticks.png')
     },
     {
-        title: 'Jégdisco',
-        text: 'Kéthetente szombat esténként buli a jégen! Fények, zene, DJ! Hozd a barátaidat is!',
+        title: 'Jégdiszkó',
+        text: 'Látványos fényekkel és zenével, kiemelt szombat estéken – ne maradj le a szezon bulijairól!',
         icon: assetUrl('/assets/img/icons/disco-ball.png')
     }
 ]
 
 const experiences = [
     {
+        tag: 'Pálya',
+        title: 'Fedett jégfelület',
+        copy: '450 m² kiváló minőségű, rendszeresen karbantartott jég – időjárástól függetlenül szeptembertől júniusig.'
+    },
+    {
         tag: 'Oktatás',
-        title: 'Tanulj játszva!',
-        copy: 'Kis csoportokban oktatunk, hogy mindenkire jusson idő. Kezdőket és haladókat is várunk szeretettel.'
+        title: 'Kori & hoki suli',
+        copy: 'Tanfolyamok és edzések korcsolyázásra, hoki alapokra és utánpótlásra. Kisebb csoportok, személyre szabott figyelem.'
     },
     {
         tag: 'Események',
-        title: 'Rendezvények',
-        copy: 'Szülinap, céges buli vagy csak egy zártkörű csúszás? Béreljétek ki a pályát, mi segítünk a szervezésben.'
-    },
-    {
-        tag: 'Pihenés',
-        title: 'Büfé és melegedő',
-        copy: 'Ha elfáradtál, vagy csak kísérőként jöttél, a büfében forró csokival, gofrival, forró teával és sok más finomsággal várunk.'
+        title: 'Bérlés & programok',
+        copy: 'Szülinapok, céges rendezvények, zártkörű események – pályabérlés rugalmas idősávokkal, támogatással.'
     }
 ]
 
 const events = [
     {
-        title: 'Szombati Jégdisco',
-        time: 'Szombat 19:00 – 22:00',
-        badge: 'Nyitott',
-        desc: 'Minden második szombaton! Szuper zenék, fények és hangulat.',
+        title: 'Jégdiszkó szombat este',
+        time: 'Kéthetente szombaton 19-től',
+        badge: 'Esemény',
+        desc: 'DJ, fények, party hangulat – figyeld a dátumokat, ne maradj le!',
         image: assetUrl('/assets/img/hero_3.jpg')
     },
     {
-        title: 'Pályabérlés csapatoknak',
-        time: 'Hétfő – Csütörtök 06:00 – 08:00',
-        badge: 'Foglalt',
-        desc: 'Reggeli és esti edzési lehetőség amatőr és profi csapatoknak. Érdeklődj elérhetőségeinken!',
+        title: 'Pályabérlés',
+        time: 'Rugalmas idősávok egyeztetéssel',
+        badge: 'Bérlés',
+        desc: 'Csapatoknak, szülinapokra, cégeknek – kérj ajánlatot elérhetőségeinken.',
         image: assetUrl('/assets/img/hero_4.jpg')
     }
 ]
@@ -65,12 +65,12 @@ export default function Home() {
                 </div>
                 <div className="relative z-10 max-w-6xl mx-auto px-4 py-28 flex flex-col lg:flex-row gap-10 items-center">
                     <div className="space-y-6 lg:w-1/2">
-                        <span className="badge-ice">Egész évben nyitva</span>
+                        <span className="badge-ice">Szeptember–Június</span>
                         <h1 className="text-4xl md:text-6xl font-heading leading-tight">
                             Korcsolyázz nálunk Budaörsön, a <span className="text-accent">NewIce</span> pályán!
                         </h1>
                         <p className="text-white/80 text-lg">
-                            Legyen szó edzésről, délutáni csúszásról vagy esti buliról, nálunk mindig jó a hangulat. Fedett pálya, kényelmes öltözők és büfé vár.
+                            Modern, családias hangulatú fedett jégpálya Budaörsön. Rekreáció, edzés, közönségjég és látványos események – mindig friss, gondozott jégfelülettel.
                         </p>
                         <div className="flex flex-wrap gap-4">
                             <Link to="/open" className="btn-ice">Nyitvatartás</Link>
@@ -78,16 +78,16 @@ export default function Home() {
                         </div>
                         <div className="flex gap-6 pt-4 text-sm text-white/80">
                             <div>
-                                <p className="text-3xl font-heading">1000m²</p>
-                                <p>jégfelület</p>
+                                <p className="text-3xl font-heading">450m²</p>
+                                <p>fedett jég</p>
                             </div>
                             <div>
-                                <p className="text-3xl font-heading">+15</p>
-                                <p>profi oktató</p>
+                                <p className="text-3xl font-heading">Oktatás</p>
+                                <p>kori & hoki</p>
                             </div>
                             <div>
-                                <p className="text-3xl font-heading">4</p>
-                                <p>kényelmes pihenő</p>
+                                <p className="text-3xl font-heading">Bérlés</p>
+                                <p>rendezvényekre</p>
                             </div>
                         </div>
                     </div>
@@ -118,16 +118,16 @@ export default function Home() {
             <section className="max-w-6xl mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
                 <div className="space-y-5">
                     <span className="badge-ice">Aktuális</span>
-                    <h2 className="text-4xl font-heading">Hétvégi jéglabirintus</h2>
-                    <p className="text-white/75">Próbáld ki különleges akadálypályánkat hétvégente! Izgalmas kihívás kicsiknek és nagyoknak. Foglalj sávot online, a helyek gyorsan fogynak!</p>
+                    <h2 className="text-4xl font-heading">Aktuális közönségjég & programok</h2>
+                    <p className="text-white/75">Mindig ellenőrizd az aktuális pályabeosztást közönségjég előtt. Tanfolyam indulások, jégdiszkó dátumok és bérlési lehetőségek egy helyen.</p>
                     <ul className="space-y-3 text-white/80">
-                        <li>• Indulások: 08:00, 10:00, 12:00, 14:00</li>
-                        <li>• Egyszerre max. 40 fő</li>
-                        <li>• Mérd az idődet!</li>
+                        <li>• Közönségjég – friss időpontok</li>
+                        <li>• Októberi tanfolyam start</li>
+                        <li>• Következő jégdiszkó dátum</li>
                     </ul>
                     <div className="flex gap-4 pt-2">
-                        <Link to="/open" className="btn-ice">Foglalj sávot</Link>
-                        <Link to="/contact" className="btn-ghost">Szülinapi csomag</Link>
+                        <Link to="/open" className="btn-ice">Időpontok</Link>
+                        <Link to="/prices" className="btn-ghost">Áraink</Link>
                     </div>
                 </div>
                 <div className="relative rounded-[2rem] overflow-hidden shine">

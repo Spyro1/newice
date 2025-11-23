@@ -71,7 +71,7 @@ export default function Footer() {
             </div>
 
             <div className="relative text-center text-xs text-white/60 border-t border-white/10 py-4 bg-[#030f1a]/80">
-                © {new Date().getFullYear()} NewIce — Minden jog fenntartva • Web: Szenes Márton
+                © {new Date().getFullYear()} NewIce • Minden jog fenntartva • Web: Szenes Márton
             </div>
         </footer>
     )

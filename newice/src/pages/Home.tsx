@@ -3,18 +3,18 @@ import { assetUrl } from '../utils/assetUrl'
 
 const highlights = [
     {
-        title: 'Közönségjég egész nap',
-        text: 'Átlátható idősávok családoknak és kezdőknek – kristálytiszta jég, chill zene, meleg italok.',
+        title: 'Közönségjég',
+        text: 'Gyere korizni a családdal vagy a barátokkal! Jó zene, forrócsoki és szuper jég vár.',
         icon: assetUrl('/assets/img/icons/ice-skating.png')
     },
     {
-        title: 'Hokisuli & edzések',
-        text: 'Haladó edzések és korcsolya-oktatók várják a csapatokat, cégeket és iskolákat.',
+        title: 'Hoki és oktatás',
+        text: 'Szeretnél megtanulni korizni vagy jégkorongozni? Profi oktatóink segítenek, akár teljesen kezdő vagy, akkor is megéri eljönni!',
         icon: assetUrl('/assets/img/icons/hockey-sticks.png')
     },
     {
-        title: 'Disco jég',
-        text: 'Minden péntek este fényshow-val és DJ-vel. Korhatár nélkül, limitált férőhely!',
+        title: 'Jégdisco',
+        text: 'Kéthetente szombat esténként buli a jégen! Fények, zene, DJ! Hozd a barátaidat is!',
         icon: assetUrl('/assets/img/icons/disco-ball.png')
     }
 ]
@@ -22,34 +22,34 @@ const highlights = [
 const experiences = [
     {
         tag: 'Oktatás',
-        title: 'Gyors fejlődés játékos módszerekkel',
-        copy: '4–6 fős mini csoportokban dolgozunk, így mindenkire jut figyelem. A haladók hokis edzőkkel mélyíthetik a technikát.'
+        title: 'Tanulj játszva!',
+        copy: 'Kis csoportokban oktatunk, hogy mindenkire jusson idő. Kezdőket és haladókat is várunk szeretettel.'
     },
     {
         tag: 'Események',
-        title: 'Céges csúszás vagy szülinapi jégdisco',
-        copy: 'Privát pályabérlés dekorral, cateringgel, meglepetés tortával – mi adjuk a jeget, te a társaságot.'
+        title: 'Rendezvények',
+        copy: 'Szülinap, céges buli vagy csak egy zártkörű csúszás? Béreljétek ki a pályát, mi segítünk a szervezésben.'
     },
     {
-        tag: 'Recharge zóna',
-        title: 'Forró csoki & waffle bar',
-        copy: 'A jég mellett kávézó és lounge vár meleg takarókkal, így a kísérőknek is élmény a délután.'
+        tag: 'Pihenés',
+        title: 'Büfé és melegedő',
+        copy: 'Ha elfáradtál, vagy csak kísérőként jöttél, a büfében forró csokival, gofrival, forró teával és sok más finomsággal várunk.'
     }
 ]
 
 const events = [
     {
-        title: 'Glow Disco Friday',
-        time: 'Péntek 20:30 – 23:30',
+        title: 'Szombati Jégdisco',
+        time: 'Szombat 19:00 – 22:00',
         badge: 'Nyitott',
-        desc: 'UV-fény, DJ, jégkoktélok. Limitált jegyek a helyszínen és online.',
+        desc: 'Minden második szombaton! Szuper zenék, fények és hangulat.',
         image: assetUrl('/assets/img/hero_3.jpg')
     },
     {
-        title: 'Csapatbérlés prime idősávban',
+        title: 'Pályabérlés csapatoknak',
         time: 'Hétfő – Csütörtök 06:00 – 08:00',
-        badge: 'Foglalt gyorsan',
-        desc: 'Vállalati vagy hokicsapat számára fenntartott edzésidő, profi jégmesterekkel.',
+        badge: 'Foglalt',
+        desc: 'Reggeli és esti edzési lehetőség amatőr és profi csapatoknak. Érdeklődj elérhetőségeinken!',
         image: assetUrl('/assets/img/hero_4.jpg')
     }
 ]
@@ -65,29 +65,29 @@ export default function Home() {
                 </div>
                 <div className="relative z-10 max-w-6xl mx-auto px-4 py-28 flex flex-col lg:flex-row gap-10 items-center">
                     <div className="space-y-6 lg:w-1/2">
-                        <span className="badge-ice">Fedett jég 365 nap</span>
+                        <span className="badge-ice">Egész évben nyitva</span>
                         <h1 className="text-4xl md:text-6xl font-heading leading-tight">
-                            Korlátlan korcsolya-élmény a <span className="text-accent">NewIce</span> pályán
+                            Korizz nálunk Budaörsön, a <span className="text-accent">NewIce</span> pályán!
                         </h1>
                         <p className="text-white/80 text-lg">
-                            Hajnalban edzés, délután közönségjég, este disco. Kényelmes lounge, digitális beléptetés és prémium jégfelület vár.
+                            Legyen szó edzésről, délutáni csúszásról vagy esti buliról, nálunk mindig jó a hangulat. Fedett pálya, kényelmes öltözők és büfé vár.
                         </p>
                         <div className="flex flex-wrap gap-4">
                             <Link to="/open" className="btn-ice">Nyitvatartás</Link>
-                            <Link to="/gallery" className="btn-ghost">Nézd meg a hangulatot</Link>
+                            <Link to="/gallery" className="btn-ghost">Galéria</Link>
                         </div>
                         <div className="flex gap-6 pt-4 text-sm text-white/80">
                             <div>
                                 <p className="text-3xl font-heading">1000m²</p>
-                                <p>tükörjég minden napon</p>
+                                <p>jégfelület</p>
                             </div>
                             <div>
                                 <p className="text-3xl font-heading">+15</p>
-                                <p>oktató és edző</p>
+                                <p>profi oktató</p>
                             </div>
                             <div>
                                 <p className="text-3xl font-heading">4</p>
-                                <p>dedikált lounge zóna</p>
+                                <p>kényelmes pihenő</p>
                             </div>
                         </div>
                     </div>
@@ -95,9 +95,9 @@ export default function Home() {
                     <div className="relative lg:w-1/2 image-stack">
                         <img src={assetUrl('/assets/img/hero_2.jpg')} alt="Family skating" className="relative w-full h-[420px] object-cover" />
                         <div className="absolute -bottom-10 -left-6 bg-white/10 backdrop-blur rounded-2xl px-6 py-4 border border-white/20 shadow-2xl">
-                            <p className="text-sm uppercase tracking-[0.3em] text-accent">Élő hőmérséklet</p>
+                            <p className="text-sm uppercase tracking-[0.3em] text-accent">Jég hőmérséklete</p>
                             <p className="text-3xl font-heading">-3.5°C</p>
-                            <p className="text-xs text-white/70">Optimális korcsolyához</p>
+                            <p className="text-xs text-white/70">Tökéletes a csúszáshoz</p>
                         </div>
                     </div>
                 </div>
@@ -118,12 +118,12 @@ export default function Home() {
             <section className="max-w-6xl mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
                 <div className="space-y-5">
                     <span className="badge-ice">Aktuális</span>
-                    <h2 className="text-4xl font-heading">Jéglabirintus hétvégenként nonstop</h2>
-                    <p className="text-white/75">A fedett csarnokban az aktuális akadálypálya pályarendszere vár. Foglalj sávot online, a helyek gyorsan fogynak!</p>
+                    <h2 className="text-4xl font-heading">Hétvégi jéglabirintus</h2>
+                    <p className="text-white/75">Próbáld ki különleges akadálypályánkat hétvégente! Izgalmas kihívás kicsiknek és nagyoknak. Foglalj sávot online, a helyek gyorsan fogynak!</p>
                     <ul className="space-y-3 text-white/80">
-                        <li>• Foglalható blokkok: 08:00, 10:00, 12:00, 14:00</li>
-                        <li>• Maximum 40 fő egyszerre a labirintusban</li>
-                        <li>• LED kijelzőn követhető az időeredmény</li>
+                        <li>• Indulások: 08:00, 10:00, 12:00, 14:00</li>
+                        <li>• Egyszerre max. 40 fő</li>
+                        <li>• Mérd az idődet!</li>
                     </ul>
                     <div className="flex gap-4 pt-2">
                         <Link to="/open" className="btn-ice">Foglalj sávot</Link>

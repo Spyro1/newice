@@ -67,7 +67,7 @@ export default function Home() {
                     <div className="space-y-6 lg:w-1/2">
                         <span className="badge-ice">Egész évben nyitva</span>
                         <h1 className="text-4xl md:text-6xl font-heading leading-tight">
-                            Korizz nálunk Budaörsön, a <span className="text-accent">NewIce</span> pályán!
+                            Korcsolyázz nálunk Budaörsön, a <span className="text-accent">NewIce</span> pályán!
                         </h1>
                         <p className="text-white/80 text-lg">
                             Legyen szó edzésről, délutáni csúszásról vagy esti buliról, nálunk mindig jó a hangulat. Fedett pálya, kényelmes öltözők és büfé vár.

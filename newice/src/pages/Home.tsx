@@ -1,5 +1,10 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { assetUrl } from '../utils/assetUrl'
+
+const OPENWEATHER_API_KEY = process.env.REACT_APP_OPENWEATHER_API_KEY || ''
+const OPENWEATHER_ENDPOINT = 'https://api.openweathermap.org/data/2.5/weather'
+const OPENWEATHER_QUERY = encodeURIComponent('Budaörs,HU')
 
 const highlights = [
     {
@@ -55,6 +60,45 @@ const events = [
 ]
 
 export default function Home() {
+    const [weatherTemperature, setWeatherTemperature] = useState<string | null>(null)
+
+    useEffect(() => {
+        let isMounted = true
+
+        const fetchTemperature = async () => {
+            try {
+                const response = await fetch(`${OPENWEATHER_ENDPOINT}?q=${OPENWEATHER_QUERY}&units=metric&appid=${OPENWEATHER_API_KEY}`)
+
+                if (!response.ok) {
+                    throw new Error(`OpenWeather response ${response.status}`)
+                }
+
+                const data: { main?: { temp?: number } } = await response.json()
+                const temp = data.main?.temp
+
+                if (isMounted && typeof temp === 'number') {
+                    setWeatherTemperature(temp.toFixed(1))
+                }
+            } catch (error) {
+                if (isMounted) {
+                    console.error('Hiba történt az openWeather lekérés közben:', error)
+                    setWeatherTemperature(null)
+                }
+            }
+        }
+
+        fetchTemperature()
+
+        const intervalId = window.setInterval(fetchTemperature, 10 * 60 * 1000)
+
+        return () => {
+            isMounted = false
+            window.clearInterval(intervalId)
+        }
+    }, [])
+
+    const displayedTemperature = weatherTemperature !== null ? `${weatherTemperature}°C` : '—'
+
     return (
         <div className="space-y-24 pb-24 text-white">
             <section className="relative overflow-hidden">
@@ -95,9 +139,9 @@ export default function Home() {
                     <div className="relative lg:w-1/2 image-stack">
                         <img src={assetUrl('/assets/img/hero_2.jpg')} alt="Family skating" className="relative w-full h-[420px] object-cover" />
                         <div className="absolute -bottom-10 -left-6 bg-white/10 backdrop-blur rounded-2xl px-6 py-4 border border-white/20 shadow-2xl">
-                            <p className="text-sm uppercase tracking-[0.3em] text-accent">Jég hőmérséklete</p>
-                            <p className="text-3xl font-heading">-3.5°C</p>
-                            <p className="text-xs text-white/70">Tökéletes a csúszáshoz</p>
+                            <p className="text-sm uppercase tracking-[0.3em] text-accent">Külső hőmérséklet</p>
+                            <p className="text-3xl font-heading">{displayedTemperature}</p>
+                            <p className="text-xs text-white/70">OpenWeather adatok Budaörsről</p>
                         </div>
                     </div>
                 </div>

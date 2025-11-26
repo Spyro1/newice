@@ -14,7 +14,7 @@ jobs:
   build-and-deploy:
     # A környezet, amiben futni fog (leggyakrabban Ubuntu a CI/CD-hez)
     environment:
-      name: production
+      name: github-pages
     runs-on: ubuntu-latest
     permissions:
       contents: write # Ezt kell a gh-pages-nek a push-hoz
@@ -48,6 +48,7 @@ jobs:
       - name: Run Deploy Script
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REACT_APP_OPENWEATHER_API_KEY: ${{ secrets.REACT_APP_OPENWEATHER_API_KEY }}
         run: |
           npm run build
           npx gh-pages -d build -b gh-pages --repo "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"

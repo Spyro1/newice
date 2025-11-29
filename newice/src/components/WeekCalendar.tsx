@@ -52,11 +52,24 @@ export const WeekCalendar: React.FC<WeekCalendarProps> = ({ initial = [], admin 
     const [draft, setDraft] = useState<Partial<SlotItem>>({ day: 'hetfo', start: 8, end: 9, label: '', color: '#0d84a3' })
     const [editingId, setEditingId] = useState<string | null>(null)
     const [confirmDelete, setConfirmDelete] = useState<SlotItem | null>(null)
+    const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' && window.matchMedia('(max-width: 767px)').matches)
 
     // Persist slots whenever they change (avoids stale closure issues during rapid add/edit sequences)
     useEffect(() => {
         try { localStorage.setItem('weekCalendarSlots', JSON.stringify(slots)) } catch { /* ignore */ }
     }, [slots])
+
+    useEffect(() => {
+        if (typeof window === 'undefined') return
+        const query = window.matchMedia('(max-width: 767px)')
+        const listener = (event: MediaQueryListEvent) => setIsMobile(event.matches)
+        if (typeof query.addEventListener === 'function') {
+            query.addEventListener('change', listener)
+            return () => query.removeEventListener('change', listener)
+        }
+        query.addListener(listener)
+        return () => query.removeListener(listener)
+    }, [])
 
     const openNew = () => { setEditingId(null); setDraft({ day: 'hetfo', start: 8, end: 9, label: '', color: palette[0] }); setFormOpen(true) }
     const openEdit = useCallback((slot: SlotItem) => {
@@ -99,18 +112,22 @@ export const WeekCalendar: React.FC<WeekCalendarProps> = ({ initial = [], admin 
     }, [slots])
 
     const totalHours = hourRange.end - hourRange.start
-    const rowHeight = 44 // px per hour
+    const rowHeight = 44 // base px per hour (without borders)
     const headerCellRef = useRef<HTMLDivElement | null>(null)
+    const firstBodyCellRef = useRef<HTMLDivElement | null>(null)
     const [headerHeight, setHeaderHeight] = useState<number>(40)
+    const [rowPixelHeight, setRowPixelHeight] = useState<number>(rowHeight)
+    const effectiveRowHeight = rowPixelHeight || rowHeight
     useEffect(() => {
         function measure() {
             if (headerCellRef.current) setHeaderHeight(headerCellRef.current.getBoundingClientRect().height)
+            if (firstBodyCellRef.current) setRowPixelHeight(firstBodyCellRef.current.getBoundingClientRect().height)
         }
         measure()
         window.addEventListener('resize', measure)
         return () => window.removeEventListener('resize', measure)
     }, [])
-    const calendarHeight = headerHeight + totalHours * rowHeight
+    const calendarHeight = headerHeight + totalHours * effectiveRowHeight
     const palette = ['#0d84a3', '#0d6f57', '#b4761e', '#a83b7c', '#5a6b73', '#8d0f45', '#0e5c28', '#4a1d7d']
 
     // Selection (interval creation by drag)
@@ -130,7 +147,7 @@ export const WeekCalendar: React.FC<WeekCalendarProps> = ({ initial = [], admin 
         const el = e.currentTarget
         const rect = el.getBoundingClientRect()
         const offsetY = e.clientY - rect.top
-        let hour = hourRange.start + Math.floor(offsetY / rowHeight)
+        let hour = hourRange.start + Math.floor(offsetY / effectiveRowHeight)
         hour = Math.min(Math.max(hour, hourRange.start), hourRange.end - 1)
         setSelecting({ day, start: hour, current: hour + 1, el })
     }
@@ -150,7 +167,7 @@ export const WeekCalendar: React.FC<WeekCalendarProps> = ({ initial = [], admin 
                 if (!sel) return null
                 const rect = sel.el.getBoundingClientRect()
                 const offsetY = e.clientY - rect.top
-                let h = hourRange.start + Math.ceil(offsetY / rowHeight)
+                let h = hourRange.start + Math.ceil(offsetY / effectiveRowHeight)
                 h = Math.min(Math.max(h, sel.start + 1), hourRange.end)
                 return { ...sel, current: h }
             })
@@ -166,7 +183,7 @@ export const WeekCalendar: React.FC<WeekCalendarProps> = ({ initial = [], admin 
         window.addEventListener('mousemove', onMove)
         window.addEventListener('mouseup', onUp, { once: true })
         return () => { window.removeEventListener('mousemove', onMove) }
-    }, [selecting])
+    }, [selecting, effectiveRowHeight])
 
     useEffect(() => {
         if (!dragging) return
@@ -176,7 +193,7 @@ export const WeekCalendar: React.FC<WeekCalendarProps> = ({ initial = [], admin 
             if (!ref) return
             const rect = ref.getBoundingClientRect()
             const offsetY = e.clientY - rect.top
-            let diff = Math.round(offsetY / rowHeight) - (dragging.originalStart - hourRange.start)
+            let diff = Math.round(offsetY / effectiveRowHeight) - (dragging.originalStart - hourRange.start)
             if (diff !== 0) dragMovedRef.current = true
             let newStart = dragging.originalStart + diff
             newStart = Math.min(Math.max(newStart, hourRange.start), hourRange.end - dragging.duration)
@@ -206,7 +223,50 @@ export const WeekCalendar: React.FC<WeekCalendarProps> = ({ initial = [], admin 
         window.addEventListener('mousemove', onMove)
         window.addEventListener('mouseup', onUp, { once: true })
         return () => { window.removeEventListener('mousemove', onMove) }
-    }, [dragging, admin, openEdit])
+    }, [dragging, admin, openEdit, effectiveRowHeight])
+
+    if (!admin && isMobile) {
+        return (
+            <div className="space-y-5">
+                <div className="text-center">
+                    <h3 className="text-2xl font-heading">Heti naptár</h3>
+                    <p className="text-white/60 text-xs mt-1">Részletes interaktív táblázat asztali nézetben érhető el.</p>
+                </div>
+                <div className="space-y-4">
+                    {Object.entries(dayLabels).map(([dayKey, label]) => {
+                        const day = dayKey as DayKey
+                        const daySlots = byDay[day]
+                        return (
+                            <article key={day} className="frosted-card p-4 space-y-3">
+                                <div className="flex items-center justify-between">
+                                    <h4 className="text-sm font-heading uppercase tracking-[0.18em] text-white">{label}</h4>
+                                    <span className="text-white/50 text-xs">{daySlots.length} idősáv</span>
+                                </div>
+                                {daySlots.length > 0 ? (
+                                    <ul className="space-y-3">
+                                        {daySlots.map(slot => (
+                                            <li key={slot.id} className="flex items-center justify-between gap-3 rounded-xl bg-white/5 border border-white/10 px-3 py-2">
+                                                <div className="space-y-1">
+                                                    <p className="font-heading text-sm text-white leading-tight">{slot.label}</p>
+                                                    <p className="text-white/60 text-xs">{slot.start}:00 – {slot.end}:00</p>
+                                                </div>
+                                                <span className="flex items-center gap-2 text-xs text-white/60">
+                                                    <span className="inline-flex h-2.5 w-2.5 rounded-full" style={{ backgroundColor: slot.color }}></span>
+                                                    {slot.end - slot.start} óra
+                                                </span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                ) : (
+                                    <p className="text-white/50 text-xs italic">Nincs rögzített idősáv.</p>
+                                )}
+                            </article>
+                        )
+                    })}
+                </div>
+            </div>
+        )
+    }
 
     return (
         <div className="space-y-6">
@@ -215,35 +275,38 @@ export const WeekCalendar: React.FC<WeekCalendarProps> = ({ initial = [], admin 
                 {admin && <button onClick={openNew} className="btn-ice text-sm">Új idősáv</button>}
             </div>
             <div className="overflow-x-auto overflow-y-hidden rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm relative" style={{ height: calendarHeight }}>
-                <div className="min-w-[900px] grid" style={{ gridTemplateColumns: `80px repeat(7, 1fr)` }}>
+                <div className="relative min-w-[900px]" style={{ height: calendarHeight }}>
+                    <div className="grid" style={{ gridTemplateColumns: `80px repeat(7, 1fr)` }}>
                     {/* Hour column header */}
-                    <div ref={headerCellRef} className="bg-white/5 border border-white/10 p-2 text-xs uppercase tracking-[0.2em] text-white/60">Idő</div>
-                    {Object.entries(dayLabels).map(([dayKey, label]) => (
-                        <div key={dayKey} className="bg-white/5 border border-white/10 p-2 text-xs uppercase tracking-[0.15em] text-center text-white/70">{label}</div>
-                    ))}
-                    {/* Body rows (hour labels only) */}
-                    {Array.from({ length: totalHours }).map((_, i) => {
-                        const hour = hourRange.start + i
-                        return (
-                            <React.Fragment key={hour}>
-                                <div className="border border-white/10 px-2 flex items-center text-sm text-white/60" style={{ height: rowHeight }}>{String(hour).padStart(2, '0')}:00</div>
-                                {Object.keys(dayLabels).map(dk => {
-                                    const day = dk as DayKey
-                                    return (
-                                        <div
-                                            key={day + ':' + hour}
-                                            className="border border-white/10 relative"
-                                            style={{ height: rowHeight }}
-                                        />
-                                    )
-                                })}
-                            </React.Fragment>
-                        )
-                    })}
-                </div>
+                        <div ref={headerCellRef} className="bg-white/5 border border-white/10 p-2 text-xs uppercase tracking-[0.2em] text-white/60">Idő</div>
+                        {Object.entries(dayLabels).map(([dayKey, label]) => (
+                            <div key={dayKey} className="bg-white/5 border border-white/10 p-2 text-xs uppercase tracking-[0.15em] text-center text-white/70">{label}</div>
+                        ))}
+                        {/* Body rows (hour labels only) */}
+                        {Array.from({ length: totalHours }).map((_, i) => {
+                            const hour = hourRange.start + i
+                            return (
+                                <React.Fragment key={hour}>
+                                    <div className="border border-white/10 px-2 flex items-center text-sm text-white/60" style={{ height: rowHeight }}>{String(hour).padStart(2, '0')}:00</div>
+                                    {Object.keys(dayLabels).map(dk => {
+                                        const day = dk as DayKey
+                                        const isFirstCell = i === 0 && day === 'hetfo'
+                                        return (
+                                            <div
+                                                key={day + ':' + hour}
+                                                className="border border-white/10 relative"
+                                                style={{ height: rowHeight }}
+                                                ref={isFirstCell ? firstBodyCellRef : undefined}
+                                            />
+                                        )
+                                    })}
+                                </React.Fragment>
+                            )
+                        })}
+                    </div>
                 {/* Overlay slot layers */}
-                <div className="grid absolute left-0 right-0" style={{ top: headerHeight, gridTemplateColumns: `80px repeat(7, 1fr)`, height: totalHours * rowHeight }}>
-                    <div style={{ height: totalHours * rowHeight }} />
+                    <div className="grid absolute left-0 right-0" style={{ top: headerHeight, gridTemplateColumns: `80px repeat(7, 1fr)`, height: totalHours * effectiveRowHeight }}>
+                    <div style={{ height: totalHours * effectiveRowHeight }} />
                     {Object.keys(dayLabels).map(dk => {
                         const day = dk as DayKey
                         return (
@@ -257,9 +320,10 @@ export const WeekCalendar: React.FC<WeekCalendarProps> = ({ initial = [], admin 
                             >
                                 {/* Slots */}
                                 {byDay[day].map(slot => {
-                                    const top = (slot.start - hourRange.start) * rowHeight
-                                    const height = (slot.end - slot.start) * rowHeight
-                                    const maxTop = totalHours * rowHeight - height
+                                    const slotDuration = slot.end - slot.start
+                                    const top = (slot.start - hourRange.start) * effectiveRowHeight
+                                    const height = Math.max(effectiveRowHeight, slotDuration * effectiveRowHeight)
+                                    const maxTop = totalHours * effectiveRowHeight - height
                                     const clampedTop = Math.min(top, maxTop)
                                     const oneHour = slot.end - slot.start === 1
                                     // Decide styling based on duration & mode
@@ -316,12 +380,13 @@ export const WeekCalendar: React.FC<WeekCalendarProps> = ({ initial = [], admin 
                                 {selecting && selecting.day === day && (
                                     <div
                                         className="absolute left-1 right-1 rounded-md border border-cyan-300/60 bg-cyan-400/30"
-                                        style={{ top: (selecting.start - hourRange.start) * rowHeight, height: (selecting.current - selecting.start) * rowHeight }}
+                                        style={{ top: (selecting.start - hourRange.start) * effectiveRowHeight, height: (selecting.current - selecting.start) * effectiveRowHeight }}
                                     />
                                 )}
                             </div>
                         )
                     })}
+                </div>
                 </div>
             </div>
             {formOpen && (

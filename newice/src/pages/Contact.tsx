@@ -8,22 +8,22 @@ const contactChips = [
 
 export default function Contact() {
     return (
-        <section className="max-w-6xl mx-auto px-4 py-20 grid gap-10 lg:grid-cols-[1.2fr,0.8fr] text-white">
+        <section className="max-w-6xl mx-auto px-4 py-16 grid gap-8 text-white md:gap-10 md:py-20 lg:grid-cols-[1.2fr,0.8fr]">
             <div className="space-y-6">
-                <div className="frosted-card p-8 space-y-4">
+                <div className="frosted-card p-5 space-y-4 sm:p-6 md:p-8">
                     <span className="badge-ice">Kapcsolat</span>
-                    <h2 className="text-4xl font-heading">Foglalás & infó</h2>
-                    <p className="text-white/70">Írj vagy csörgess, és 1 munkanapon belül egyeztetünk időpontot pályabérlésre, oktatásra vagy eseményre.</p>
-                    <div className="flex flex-wrap gap-3 pt-2">
+                    <h2 className="text-3xl font-heading sm:text-4xl">Foglalás & infó</h2>
+                    <p className="text-white/70 text-sm sm:text-base">Írj vagy csörgess, és 1 munkanapon belül egyeztetünk időpontot pályabérlésre, oktatásra vagy eseményre.</p>
+                    <div className="flex flex-wrap gap-3 pt-1">
                         {contactChips.map(chip => (
-                            <a key={chip.label} href={chip.href ?? '#'} className="px-4 py-2 rounded-full border border-white/15 text-sm text-white/80 hover:border-accent">
+                            <a key={chip.label} href={chip.href ?? '#'} className="px-3 py-2 rounded-full border border-white/15 text-xs text-white/80 hover:border-accent sm:px-4 sm:text-sm">
                                 <span className="text-white/50 mr-2">{chip.label}:</span>{chip.value}
                             </a>
                         ))}
                     </div>
                 </div>
 
-                <form className="frosted-card p-8 space-y-4">
+                <form className="frosted-card p-5 space-y-4 sm:p-6 md:p-8">
                     <div className="grid md:grid-cols-2 gap-4">
                         <input className="w-full bg-white/5 border border-white/10 px-4 py-3 rounded-xl" type="text" placeholder="Név" />
                         <input className="w-full bg-white/5 border border-white/10 px-4 py-3 rounded-xl" type="email" placeholder="Email" />
@@ -34,9 +34,9 @@ export default function Contact() {
                 </form>
             </div>
 
-            <div className="frosted-card p-0 overflow-hidden">
-                <img src={assetUrl('/assets/img/hero_4.jpg')} alt="Jégpálya" className="h-80 w-full object-cover" />
-                <div className="p-6 space-y-2 text-white/80 text-sm">
+            <div className="frosted-card overflow-hidden">
+                <img src={assetUrl('/assets/img/hero_4.jpg')} alt="Jégpálya" className="h-60 w-full object-cover sm:h-72 md:h-80" />
+                <div className="p-5 space-y-2 text-white/80 text-sm sm:p-6">
                     <p>Parkolás: ingyenes, 120 férőhelyes felszíni parkoló.</p>
                     <p>Tömegközlekedés: 40-es busz Budaörs Sportcsarnok megálló.</p>
                     <p>Nyitvatartás: lásd részletesen a nyitvatartás oldalt.</p>

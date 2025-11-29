@@ -162,6 +162,45 @@ main {
     transform: translateX(100%);
 }
 
+@media (max-width: 640px) {
+    body {
+        line-height: 1.55;
+    }
+
+    .btn-ice {
+        padding: 0.75rem 1.4rem;
+        font-size: 0.95rem;
+        box-shadow: 0 10px 24px rgba(36, 164, 255, 0.3);
+    }
+
+    .btn-ghost {
+        padding: 0.65rem 1.3rem;
+        font-size: 0.9rem;
+    }
+
+    .badge-ice {
+        font-size: 0.72rem;
+        padding: 0.25rem 0.85rem;
+        letter-spacing: 0.16em;
+    }
+
+    .frosted-card {
+        border-radius: 1rem;
+    }
+
+    .grid-lines {
+        background-size: 60px 60px;
+    }
+
+    .image-stack::before {
+        inset: 0.75rem;
+    }
+
+    .image-stack img {
+        border-radius: 1.25rem;
+    }
+}
+
 .schedule-status-open {
     background: rgba(65, 223, 177, 0.14);
     color: #5ff9c8;

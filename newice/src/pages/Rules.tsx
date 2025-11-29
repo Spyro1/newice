@@ -25,18 +25,18 @@ const rules = [
 
 export default function Rules() {
     return (
-        <section className="max-w-6xl mx-auto px-4 py-20 space-y-10 text-white">
+        <section className="max-w-6xl mx-auto px-4 py-16 space-y-8 text-white md:space-y-10 md:py-20">
             <header className="text-center space-y-3">
                 <span className="badge-ice">Házirend</span>
-                <h2 className="text-4xl font-heading">Biztonságos jég mindenkiért</h2>
-                <p className="text-white/70">Az alábbi szabályokkal biztosítjuk, hogy minden korosztály gondtalanul élvezhesse a csúszást.</p>
+                <h2 className="text-3xl font-heading sm:text-4xl">Biztonságos jég mindenkiért</h2>
+                <p className="text-white/70 text-sm sm:text-base">Az alábbi szabályokkal biztosítjuk, hogy minden korosztály gondtalanul élvezhesse a csúszást.</p>
             </header>
             <div className="grid gap-6 md:grid-cols-2">
                 {rules.map(rule => (
-                    <article key={rule.title} className="frosted-card p-6 flex gap-4 items-start">
+                    <article key={rule.title} className="frosted-card p-5 flex gap-4 items-start sm:p-6">
                         <img src={assetUrl(rule.icon)} alt="ikon" className="h-12 w-12" />
                         <div>
-                            <h3 className="text-2xl font-heading">{rule.title}</h3>
+                            <h3 className="text-xl font-heading sm:text-2xl">{rule.title}</h3>
                             <p className="text-white/75 text-sm">{rule.desc}</p>
                         </div>
                     </article>

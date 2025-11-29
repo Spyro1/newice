@@ -16,8 +16,8 @@ const familyTickets = [
 ]
 
 const skateRental = [
-    { title: 'Korcsolya bérlés ≤14 év', price: '1 500 Ft / alkalom', desc: 'Fertőtlenítve minden használat után.' },
-    { title: 'Korcsolya bérlés >14 év', price: '2 000 Ft / alkalom', desc: 'Korlátozott méret készlet – érkezz időben.' }
+    { title: 'Gyermek (≤14 év)', price: '1 500 Ft / alkalom', desc: 'Fertőtlenítve minden használat után.' },
+    { title: 'Felnőtt (>14 év)', price: '2 000 Ft / alkalom', desc: 'Korlátozott méret készlet – érkezz időben.' }
 ]
 
 const rinkRental = [
@@ -39,75 +39,81 @@ const extras = [
     { label: 'Jégdiszkó', price: 'Kiemelt esemény díjszabás' }
 ]
 
+const sectionTitleClass = 'text-2xl font-heading'
+const cardWrapperClass = 'frosted-card px-5 py-4 space-y-3 sm:px-6 sm:py-5'
+const cardHeadingClass = 'text-sm font-heading uppercase tracking-[0.15em] text-white/90 sm:text-base'
+const cardPriceClass = 'text-xl font-heading text-accent sm:text-2xl'
+const cardCopyClass = 'text-white/65 text-xs sm:text-sm'
+
 export default function Prices() {
     return (
-        <section className="max-w-6xl mx-auto px-4 py-20 text-white space-y-14">
+        <section className="max-w-6xl mx-auto px-4 py-16 text-white space-y-12 md:space-y-14 md:py-20">
             <header className="text-center space-y-3">
                 <span className="badge-ice">Áraink</span>
-                <h1 className="text-4xl font-heading">Közönségjég, bérlés, oktatás</h1>
-                <p className="text-white/70 text-sm md:text-base">Az árak bruttó értékek, forintban.</p>
+                <h1 className="text-3xl font-heading sm:text-4xl">Közönségjég, bérlés, oktatás</h1>
+                <p className="text-white/70 text-xs sm:text-sm md:text-base">Az árak bruttó értékek, forintban.</p>
             </header>
 
-            <div className="space-y-10">
-                <h2 className="text-2xl font-heading">Közönségjég hétköznap</h2>
+            <div className="space-y-8 sm:space-y-10">
+                <h2 className={sectionTitleClass}>Közönségjég hétköznap</h2>
                 <div className="grid gap-6 md:grid-cols-2">
                     {weekdayPublic.map(item => (
-                        <article key={item.title} className="frosted-card p-6 space-y-3">
-                            <h3 className="text-xl font-heading">{item.title}</h3>
-                            <p className="text-3xl font-heading text-accent">{item.price}</p>
-                            <p className="text-white/70 text-sm">{item.desc}</p>
+                        <article key={item.title} className={cardWrapperClass}>
+                            <h3 className={cardHeadingClass}>{item.title}</h3>
+                            <p className={cardPriceClass}>{item.price}</p>
+                            <p className={cardCopyClass}>{item.desc}</p>
                         </article>
                     ))}
                 </div>
             </div>
 
-            <div className="space-y-10">
-                <h2 className="text-2xl font-heading">Közönségjég hétvége / szünet</h2>
+            <div className="space-y-8 sm:space-y-10">
+                <h2 className={sectionTitleClass}>Közönségjég hétvége / szünet</h2>
                 <div className="grid gap-6 md:grid-cols-2">
                     {weekendPublic.map(item => (
-                        <article key={item.title} className="frosted-card p-6 space-y-3">
-                            <h3 className="text-xl font-heading">{item.title}</h3>
-                            <p className="text-3xl font-heading text-accent">{item.price}</p>
-                            <p className="text-white/70 text-sm">{item.desc}</p>
+                        <article key={item.title} className={cardWrapperClass}>
+                            <h3 className={cardHeadingClass}>{item.title}</h3>
+                            <p className={cardPriceClass}>{item.price}</p>
+                            <p className={cardCopyClass}>{item.desc}</p>
                         </article>
                     ))}
                 </div>
             </div>
 
             <div className="space-y-8">
-                <h2 className="text-2xl font-heading">Családi belépők</h2>
+                <h2 className={sectionTitleClass}>Családi belépők</h2>
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                     {familyTickets.map(item => (
-                        <article key={item.title} className="frosted-card p-5 space-y-2">
-                            <h3 className="text-sm font-heading uppercase tracking-[0.2em]">{item.title}</h3>
-                            <p className="text-2xl font-heading text-accent">{item.price}</p>
-                            <p className="text-white/60 text-xs">{item.desc}</p>
+                        <article key={item.title} className="frosted-card px-4 py-4 space-y-3 sm:px-5">
+                            <h3 className="text-xs font-heading uppercase tracking-[0.2em] text-white/80 sm:text-sm">{item.title}</h3>
+                            <p className="text-lg font-heading text-accent sm:text-xl">{item.price}</p>
+                            <p className={cardCopyClass}>{item.desc}</p>
                         </article>
                     ))}
                 </div>
             </div>
 
             <div className="space-y-8">
-                <h2 className="text-2xl font-heading">Korcsolya bérlés</h2>
+                <h2 className={sectionTitleClass}>Korcsolya bérlés</h2>
                 <div className="grid gap-6 md:grid-cols-2">
                     {skateRental.map(item => (
-                        <article key={item.title} className="frosted-card p-6 space-y-2">
-                            <h3 className="text-lg font-heading">{item.title}</h3>
-                            <p className="text-3xl font-heading text-accent">{item.price}</p>
-                            <p className="text-white/65 text-sm">{item.desc}</p>
+                        <article key={item.title} className={cardWrapperClass}>
+                            <h3 className={cardHeadingClass}>{item.title}</h3>
+                            <p className={cardPriceClass}>{item.price}</p>
+                            <p className={cardCopyClass}>{item.desc}</p>
                         </article>
                     ))}
                 </div>
             </div>
 
             <div className="space-y-8">
-                <h2 className="text-2xl font-heading">Pályabérlés</h2>
+                <h2 className={sectionTitleClass}>Pályabérlés</h2>
                 <div className="grid gap-6 md:grid-cols-3">
                     {rinkRental.map(item => (
-                        <article key={item.title} className="frosted-card p-6 space-y-2">
-                            <h3 className="text-sm font-heading uppercase tracking-[0.15em]">{item.title}</h3>
-                            <p className="text-2xl font-heading text-accent">{item.price}</p>
-                            <p className="text-white/60 text-xs">{item.desc}</p>
+                        <article key={item.title} className={cardWrapperClass}>
+                            <h3 className={cardHeadingClass}>{item.title}</h3>
+                            <p className={cardPriceClass}>{item.price}</p>
+                            <p className={cardCopyClass}>{item.desc}</p>
                         </article>
                     ))}
                 </div>
@@ -115,26 +121,26 @@ export default function Prices() {
             </div>
 
             <div className="space-y-8">
-                <h2 className="text-2xl font-heading">Oktatás / Hoki suli</h2>
+                <h2 className={sectionTitleClass}>Oktatás / Hoki suli</h2>
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                     {education.map(item => (
-                        <article key={item.title} className="frosted-card p-5 space-y-2">
-                            <h3 className="text-sm font-heading uppercase tracking-[0.15em]">{item.title}</h3>
-                            <p className="text-xl font-heading text-accent">{item.price}</p>
-                            <p className="text-white/60 text-xs">{item.desc}</p>
+                        <article key={item.title} className="frosted-card px-4 py-4 space-y-3 sm:px-5">
+                            <h3 className="text-xs font-heading uppercase tracking-[0.15em] text-white/80 sm:text-sm">{item.title}</h3>
+                            <p className="text-lg font-heading text-accent sm:text-xl">{item.price}</p>
+                            <p className={cardCopyClass}>{item.desc}</p>
                         </article>
                     ))}
                 </div>
                 <p className="text-white/60 text-xs">Hoki utánpótlás és részletes edzésrend: <a href="http://budaorsvillamok.hu" target="_blank" rel="noreferrer" className="text-accent underline">budaorsvillamok.hu</a></p>
             </div>
 
-            <div className="frosted-card p-6 space-y-3">
-                <h3 className="text-xl font-heading">Egyéb</h3>
-                <ul className="grid md:grid-cols-3 gap-3 text-sm text-white/75">
+            <div className="frosted-card p-5 space-y-3 sm:p-6">
+                <h3 className="text-lg font-heading sm:text-xl">Egyéb</h3>
+                <ul className="grid gap-3 text-sm text-white/75 sm:grid-cols-2 md:grid-cols-3">
                     {extras.map(extra => (
-                        <li key={extra.label} className="flex items-center justify-between bg-white/5 rounded-xl px-4 py-3">
-                            <span>{extra.label}</span>
-                            <span className="text-accent text-xs">{extra.price}</span>
+                        <li key={extra.label} className="flex items-center justify-between bg-white/5 rounded-xl px-3 py-2 sm:px-4 sm:py-3">
+                            <span className="text-xs sm:text-sm">{extra.label}</span>
+                            <span className="text-accent text-[0.7rem] sm:text-xs">{extra.price}</span>
                         </li>
                     ))}
                 </ul>
